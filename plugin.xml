@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.phonegap.plugins.zebraprintermz220"
+        version="0.0.1">
+
+    <name>ZebraPrinterMZ220</name>
+
+    <description>connection bridge for Zebra MZ220 BT printer</description>
+
+    <license>MIT</license>
+
+    <js-module src="www/zebraprintermz220.js" name="ZebraPrinterMZ220">
+        <clobbers target="zPrinter" />
+    </js-module>
+
+    <asset src="www/zebraprintermz220.js" target="zebraprintermz220.js" />
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ZebraPrinterMZ220">
+                <param name="ios-package" value="ZebraPrinterMZ220" />
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
+            <array>
+                <string>com.zebra.rawport</string>
+            </array>
+        </config-file>
+
+        <header-file src="src/ios/ZebraPrinterMZ220.h" />
+        <header-file src="src/ios/MfiBtPrinterConnection.h" />
+        <header-file src="src/ios/ZebraPrinterConnection.h" />
+        <source-file src="src/ios/ZebraPrinterMZ220.m" />
+
+        <source-file src="src/ios/libZSDK_API.a" framework="true" />
+        <source-file src="src/ios/libdtdev.a" framework="true" />
+
+        <framework src="ExternalAccessory.framework" />
+    </platform>
+    <!-- android -->
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ZebraPrinterMZ220" >
+                <param name="android-package" value="com.phonegap.plugins.zebraprintermz220.ZebraPrinterMZ220"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+        </config-file>
+        <source-file src="src/android/com/phonegap/plugins/zebraprintermz220/ZebraPrinterMZ220.java" target-dir="src/com/phonegap/plugins/zebraprintermz220" />
+        <source-file src="src/android/ZSDK_API.jar" target-dir="libs"/>
+    </platform>
+
+</plugin>
